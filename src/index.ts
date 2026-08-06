@@ -42,3 +42,8 @@ export function match(template: string): (path: string) => MatchResult {
   const fn = ptrMatch<Record<string, string>>(normalizedPath);
   return (path: string): MatchResult => fn(path) as MatchResult;
 }
+
+export function compile(template: string): (params: Record<string, string>) => string {
+  const { path: normalizedPath } = normalize(template);
+  return ptrCompile<Record<string, string>>(normalizedPath);
+}

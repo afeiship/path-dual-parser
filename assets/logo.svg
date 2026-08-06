@@ -77,8 +77,8 @@
   </g>
 
   <!-- Project Name -->
-  <text x="280" y="85" font-family="system-ui, -apple-system, sans-serif" font-size="48" font-weight="700" fill="url(#primaryGrad)" filter="url(#shadow)">
-    path-dual-parser
+  <text x="280" y="85" font-family="system-ui, -apple-system, sans-serif" font-size="56" font-weight="700" fill="url(#primaryGrad)" filter="url(#shadow)">
+    Dual Parser
   </text>
 
   <!-- Tagline -->

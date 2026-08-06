@@ -87,7 +87,9 @@ interface NormalizedTemplate {
 
 ### denormalize(url, paramNames, isBraceStyle)
 
-仅 compile 使用。如果原始模板是 `{param}` 风格，将结果 URL 中的参数部分还原为 `{paramName}` 格式。
+compile 输出的是参数已填充的最终 URL（如 `/users/123`），不存在 `:param` 或 `{param}` 占位符需要还原。因此 **compile 不需要 denormalize 步骤**。
+
+denormalize 仅在需要从编译结果中提取模板结构时使用（当前设计不需要此场景）。
 
 ## Error Handling
 
@@ -109,7 +111,7 @@ interface NormalizedTemplate {
 1. `:param` 风格 match — 匹配成功/失败
 2. `{param}` 风格 match — 匹配成功/失败
 3. `:param` 风格 compile — 正确生成 URL
-4. `{param}` 风格 compile — 正确生成 URL，输出保持 `{param}` 格式
+4. `{param}` 风格 compile — 正确生成 URL
 5. 无参数模板 — match/compile 正常
 6. 多参数模板 — match/compile 正常
 7. 混用语法 — match/compile 正常

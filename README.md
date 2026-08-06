@@ -1,37 +1,32 @@
-# nx-xici-proxy
-> Xici proxy for nx.
+# path-dual-parser
+> Path matcher supporting both colon and brace URI template syntax.
+
+[![version][version-image]][version-url]
+[![license][license-image]][license-url]
+[![download][download-image]][download-url]
 
 ## installation
-```rb
-# from gem
-gem 'nx-xici-proxy'
-# from git
-gem 'nx-xici-proxy', git: 'git@github.com:afeiship/nx-xici-proxy.git',ref:'a6b0a57acd05315f97a70c9b45ffbbb7405afa0c'
+```shell
+yarn add @jswork/path-dual-parser
 ```
 
 ## usage
-```rb
-Nx::XiciProxy::fetch
+```js
+import pathDualParser from '@jswork/path-dual-parser';
 
-# result
-[
-    {
-        :ip=>"138.197.74.25", 
-        :port=>"8118"
-    }, 
-    {
-        :ip=>"167.172.17.86", 
-        :port=>"3128"
-    }
-    # ...
-]
+pathDualParser(1024);
+
+// [1000, 0, 20, 4]
 ```
 
-## build/publish
-```shell
-# build
-gem build nx-xici-proxy.gemspec
+## license
+Code released under [the MIT license](https://github.com/afeiship/path-dual-parser/blob/main/LICENSE.txt).
 
-# publish
-gem push nx-xici-proxy-0.1.0.gem
-```
+[version-image]: https://img.shields.io/npm/v/@jswork/path-dual-parser
+[version-url]: https://npmjs.org/package/@jswork/path-dual-parser
+
+[license-image]: https://img.shields.io/npm/l/@jswork/path-dual-parser
+[license-url]: https://github.com/afeiship/path-dual-parser/blob/main/LICENSE.txt
+
+[download-image]: https://img.shields.io/npm/dm/@jswork/path-dual-parser
+[download-url]: https://www.npmjs.com/package/@jswork/path-dual-parser

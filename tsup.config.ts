@@ -42,7 +42,7 @@ const umdOptions: Options = {
       'export default': 'export =',
     }),
     umdWrapper({
-      libraryName: 'urlLiteral',
+      libraryName: 'pathDualParser',
     }),
   ],
 };

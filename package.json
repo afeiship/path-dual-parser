@@ -35,8 +35,14 @@
   },
   "homepage": "https://js.work",
   "keywords": [
-    "path-dual-parser",
-    "number",
-    "num"
-  ]
+    "path",
+    "route",
+    "matcher",
+    "path-to-regexp",
+    "uri-template",
+    "dual-syntax"
+  ],
+  "dependencies": {
+    "path-to-regexp": "^8.4.2"
+  }
 }

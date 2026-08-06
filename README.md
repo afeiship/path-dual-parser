@@ -7,16 +7,38 @@
 
 ## installation
 ```shell
-yarn add @jswork/path-dual-parser
+pnpm add @jswork/path-dual-parser
 ```
 
 ## usage
-```js
-import pathDualParser from '@jswork/path-dual-parser';
 
-pathDualParser(1024);
+### match
 
-// [1000, 0, 20, 4]
+Match a path against a template, supports both `:param` and `{param}` syntax:
+
+```ts
+import { match } from '@jswork/path-dual-parser';
+
+const m1 = match('/users/:id');
+const m2 = match('/users/{id}');
+
+m1('/users/123');  // { path: '/users/123', params: { id: '123' } }
+m2('/users/123');  // { path: '/users/123', params: { id: '123' } }
+m1('/other');      // false
+```
+
+### compile
+
+Compile a template into a URL generator:
+
+```ts
+import { compile } from '@jswork/path-dual-parser';
+
+const c1 = compile('/users/:id');
+const c2 = compile('/users/{id}');
+
+c1({ id: '123' });  // '/users/123'
+c2({ id: '123' });  // '/users/123'
 ```
 
 ## license

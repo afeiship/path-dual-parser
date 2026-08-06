@@ -1,6 +1,8 @@
 # path-dual-parser
 
-![logo](./assets/logo.svg)
+<p align="center">
+  <img src="./assets/logo.svg" alt="path-dual-parser logo" width="800">
+</p>
 
 > Path matcher supporting both colon and brace URI template syntax.
 

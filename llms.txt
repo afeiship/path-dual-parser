@@ -27,6 +27,10 @@ Compile a template into a URL generator function.
 
 One-step parse template with data to URL. Simplest API for direct URL generation.
 
+**Features:**
+- Memoization: Reuses compiled template for repeated calls with same template
+- Best performance for high-frequency calls with same template
+
 - `:param` style: `parse('/users/:id', { id: '123' })` → `'/users/123'`
 - `{param}` style: `parse('/users/{id}', { id: '123' })` → `'/users/123'`
 - Mixed: `parse('/users/:userId/posts/{postId}', { userId: '1', postId: '2' })` → `'/users/1/posts/2'`

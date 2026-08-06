@@ -47,3 +47,7 @@ export function compile(template: string): (params: Record<string, string>) => s
   const { path: normalizedPath } = normalize(template);
   return ptrCompile<Record<string, string>>(normalizedPath);
 }
+
+export function parse(template: string, data: Record<string, string>): string {
+  return compile(template)(data);
+}

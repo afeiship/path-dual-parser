@@ -23,6 +23,14 @@ Compile a template into a URL generator function.
 - `:param` style: `compile('/users/:id')({ id: '123' })` → `'/users/123'`
 - `{param}` style: `compile('/users/{id}')({ id: '123' })` → `'/users/123'`
 
+### parse(template: string, data: Record<string, string>): string
+
+One-step parse template with data to URL. Simplest API for direct URL generation.
+
+- `:param` style: `parse('/users/:id', { id: '123' })` → `'/users/123'`
+- `{param}` style: `parse('/users/{id}', { id: '123' })` → `'/users/123'`
+- Mixed: `parse('/users/:userId/posts/{postId}', { userId: '1', postId: '2' })` → `'/users/1/posts/2'`
+
 ## Types
 
 ```ts
@@ -30,6 +38,7 @@ type MatchResult = { path: string; params: Record<string, string> } | false;
 
 function match(template: string): (path: string) => MatchResult;
 function compile(template: string): (params: Record<string, string>) => string;
+function parse(template: string, data: Record<string, string>): string;
 ```
 
 ## Notes

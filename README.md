@@ -41,6 +41,18 @@ c1({ id: '123' });  // '/users/123'
 c2({ id: '123' });  // '/users/123'
 ```
 
+### parse
+
+One-step parse template with data to URL (simpler API):
+
+```ts
+import { parse } from '@jswork/path-dual-parser';
+
+parse('/users/:id', { id: '123' });      // '/users/123'
+parse('/users/{id}', { id: '123' });     // '/users/123'
+parse('/users/:userId/posts/{postId}', { userId: '1', postId: '2' });  // '/users/1/posts/2'
+```
+
 ## license
 Code released under [the MIT license](https://github.com/afeiship/path-dual-parser/blob/main/LICENSE.txt).
 

@@ -1,4 +1,4 @@
-import { match, compile } from '../src';
+import { match, compile, parse } from '../src';
 
 describe('match', () => {
   test('colon style - match success', () => {
@@ -102,5 +102,31 @@ describe('compile', () => {
   test('mixed syntax', () => {
     const fn = compile('/users/:userId/posts/{postId}');
     expect(fn({ userId: '1', postId: '2' })).toBe('/users/1/posts/2');
+  });
+});
+
+describe('parse', () => {
+  test('colon style - parse to URL', () => {
+    expect(parse('/users/:id', { id: '123' })).toBe('/users/123');
+  });
+
+  test('brace style - parse to URL', () => {
+    expect(parse('/users/{id}', { id: '123' })).toBe('/users/123');
+  });
+
+  test('no params template', () => {
+    expect(parse('/users', {})).toBe('/users');
+  });
+
+  test('multi params - colon style', () => {
+    expect(parse('/users/:userId/posts/:postId', { userId: '1', postId: '2' })).toBe('/users/1/posts/2');
+  });
+
+  test('multi params - brace style', () => {
+    expect(parse('/users/{userId}/posts/{postId}', { userId: '1', postId: '2' })).toBe('/users/1/posts/2');
+  });
+
+  test('mixed syntax', () => {
+    expect(parse('/users/:userId/posts/{postId}', { userId: '1', postId: '2' })).toBe('/users/1/posts/2');
   });
 });

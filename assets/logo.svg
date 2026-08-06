@@ -87,7 +87,7 @@
   </text>
 
   <!-- Feature Badges -->
-  <g transform="translate(280, 155)">
+  <g transform="translate(280, 185)">
     <!-- TypeScript Badge -->
     <rect x="0" y="0" width="95" height="26" rx="4" fill="none" stroke="#3b82f6" stroke-width="1.5"/>
     <circle cx="18" cy="13" r="6" fill="#3b82f6"/>

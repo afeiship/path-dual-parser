@@ -1,18 +1,74 @@
-import fn from '../src';
+import { match, compile } from '../src';
 
-describe('Normal test cases', () => {
-  test('number is equal 0/10/100/1000/10000', () => {
-    expect(fn(0)).toEqual([0]);
-    expect(fn(10)).toEqual([10, 0]);
-    expect(fn(30)).toEqual([30, 0]);
-    expect(fn(40)).toEqual([40, 0]);
-    expect(fn(50)).toEqual([50, 0]);
-    expect(fn(60)).toEqual([60, 0]);
-    expect(fn(70)).toEqual([70, 0]);
-    expect(fn(80)).toEqual([80, 0]);
-    expect(fn(90)).toEqual([90, 0]);
-    expect(fn(100)).toEqual([100, 0, 0]);
-    expect(fn(1000)).toEqual([1000, 0, 0, 0]);
-    expect(fn(10000)).toEqual([10000, 0, 0, 0, 0]);
+describe('match', () => {
+  test('colon style - match success', () => {
+    const fn = match('/users/:id');
+    const result = fn('/users/123');
+    expect(result).not.toBe(false);
+    if (result) {
+      expect(result.params.id).toBe('123');
+    }
+  });
+
+  test('colon style - match failure', () => {
+    const fn = match('/users/:id');
+    expect(fn('/posts/123')).toBe(false);
+  });
+
+  test('brace style - match success', () => {
+    const fn = match('/users/{id}');
+    const result = fn('/users/123');
+    expect(result).not.toBe(false);
+    if (result) {
+      expect(result.params.id).toBe('123');
+    }
+  });
+
+  test('brace style - match failure', () => {
+    const fn = match('/users/{id}');
+    expect(fn('/posts/123')).toBe(false);
+  });
+
+  test('no params template', () => {
+    const fn = match('/users');
+    const result = fn('/users');
+    expect(result).not.toBe(false);
+    if (result) {
+      expect(result.params).toEqual({});
+    }
+  });
+
+  test('multi params - colon style', () => {
+    const fn = match('/users/:userId/posts/:postId');
+    const result = fn('/users/1/posts/2');
+    expect(result).not.toBe(false);
+    if (result) {
+      expect(result.params.userId).toBe('1');
+      expect(result.params.postId).toBe('2');
+    }
+  });
+
+  test('multi params - brace style', () => {
+    const fn = match('/users/{userId}/posts/{postId}');
+    const result = fn('/users/1/posts/2');
+    expect(result).not.toBe(false);
+    if (result) {
+      expect(result.params.userId).toBe('1');
+      expect(result.params.postId).toBe('2');
+    }
+  });
+
+  test('mixed syntax', () => {
+    const fn = match('/users/:userId/posts/{postId}');
+    const result = fn('/users/1/posts/2');
+    expect(result).not.toBe(false);
+    if (result) {
+      expect(result.params.userId).toBe('1');
+      expect(result.params.postId).toBe('2');
+    }
+  });
+
+  test('empty template throws', () => {
+    expect(() => match('')).toThrow(TypeError);
   });
 });

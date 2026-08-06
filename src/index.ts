@@ -36,3 +36,9 @@ function normalize(template: string): NormalizedTemplate {
 
   return { path, isBraceStyle, paramNames };
 }
+
+export function match(template: string): (path: string) => MatchResult {
+  const { path: normalizedPath } = normalize(template);
+  const fn = ptrMatch<Record<string, string>>(normalizedPath);
+  return (path: string): MatchResult => fn(path) as MatchResult;
+}

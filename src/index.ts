@@ -17,17 +17,22 @@ function normalize(template: string): NormalizedTemplate {
   const isBraceStyle = BRACE_RE.test(template);
   BRACE_RE.lastIndex = 0;
   const paramNames: string[] = [];
+
+  // 先转换大括号语法，同时提取参数名
   const path = template.replace(BRACE_RE, (_match, name: string) => {
     paramNames.push(name);
     return ':' + name;
   });
-  // 如果是冒号风格,也提取参数名
-  if (!isBraceStyle) {
-    const colonRe = /:(\w+)/g;
-    let m: RegExpExecArray | null;
-    while ((m = colonRe.exec(path)) !== null) {
+
+  // 提取所有冒号参数（包括混用场景和纯冒号场景）
+  const colonRe = /:(\w+)/g;
+  let m: RegExpExecArray | null;
+  while ((m = colonRe.exec(path)) !== null) {
+    // 避免重复添加（大括号已转换的参数已在 paramNames 中）
+    if (!paramNames.includes(m[1])) {
       paramNames.push(m[1]);
     }
   }
+
   return { path, isBraceStyle, paramNames };
 }

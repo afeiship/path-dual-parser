@@ -1,0 +1,40 @@
+# path-dual-parser
+
+Lightweight TypeScript route path matcher supporting both `:param` (path-to-regexp) and `{param}` (URI-Template / OpenAPI) syntax.
+
+## Installation
+
+pnpm add @jswork/path-dual-parser
+
+## API
+
+### match(template: string): (path: string) => MatchResult | false
+
+Match a path against a template. Returns a function that takes a path string and returns either `{ path, params }` or `false`.
+
+- `:param` style: `match('/users/:id')('/users/123')` → `{ path: '/users/123', params: { id: '123' } }`
+- `{param}` style: `match('/users/{id}')('/users/123')` → `{ path: '/users/123', params: { id: '123' } }`
+- No match: `match('/users/:id')('/other')` → `false`
+
+### compile(template: string): (params: Record<string, string>) => string
+
+Compile a template into a URL generator function.
+
+- `:param` style: `compile('/users/:id')({ id: '123' })` → `'/users/123'`
+- `{param}` style: `compile('/users/{id}')({ id: '123' })` → `'/users/123'`
+
+## Types
+
+```ts
+type MatchResult = { path: string; params: Record<string, string> } | false;
+
+function match(template: string): (path: string) => MatchResult;
+function compile(template: string): (params: Record<string, string>) => string;
+```
+
+## Notes
+
+- Based on path-to-regexp v8
+- Mixed syntax (`:id/{name}`) is supported
+- ESM + CJS + UMD output
+- Browser and Node.js compatible

@@ -58,6 +58,28 @@ parse('/users/{id}', { id: '123' });     // '/users/123'
 parse('/users/:userId/posts/{postId}', { userId: '1', postId: '2' });  // '/users/1/posts/2'
 ```
 
+### params
+
+Extract parameter names from a template:
+
+```ts
+import { params } from '@jswork/path-dual-parser';
+
+params('/users/:id/posts/{postId}')  // ['id', 'postId']
+params('/users')                     // []
+```
+
+### test
+
+Check whether a path matches a template (boolean result):
+
+```ts
+import { test } from '@jswork/path-dual-parser';
+
+test('/users/:id', '/users/123')  // true
+test('/users/:id', '/posts/1')    // false
+```
+
 ## license
 Code released under [the MIT license](https://github.com/afeiship/path-dual-parser/blob/main/LICENSE.txt).
 

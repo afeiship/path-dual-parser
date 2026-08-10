@@ -35,6 +35,20 @@ One-step parse template with data to URL. Simplest API for direct URL generation
 - `{param}` style: `parse('/users/{id}', { id: '123' })` → `'/users/123'`
 - Mixed: `parse('/users/:userId/posts/{postId}', { userId: '1', postId: '2' })` → `'/users/1/posts/2'`
 
+### params(template: string): string[]
+
+Extract parameter names from a template.
+
+- `params('/users/:id/posts/{postId}')` → `['id', 'postId']`
+- `params('/users')` → `[]`
+
+### test(template: string, path: string): boolean
+
+Check whether a path matches a template (boolean result).
+
+- `test('/users/:id', '/users/123')` → `true`
+- `test('/users/:id', '/posts/1')` → `false`
+
 ## Types
 
 ```ts
@@ -43,6 +57,8 @@ type MatchResult = { path: string; params: Record<string, string> } | false;
 function match(template: string): (path: string) => MatchResult;
 function compile(template: string): (params: Record<string, string>) => string;
 function parse(template: string, data: Record<string, string>): string;
+function params(template: string): string[];
+function test(template: string, path: string): boolean;
 ```
 
 ## Notes

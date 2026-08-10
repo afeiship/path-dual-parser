@@ -204,3 +204,45 @@ export function parse(template: string, data: Record<string, string>): string {
   }
   return compiler(data);
 }
+
+/**
+ * Extracts parameter names from a path template.
+ *
+ * Supports both colon syntax (`:param`) and brace syntax (`{param}`).
+ *
+ * @param template - The path template to extract parameters from
+ * @returns An array of parameter names in the order they appear
+ *
+ * @example
+ * ```ts
+ * import { params } from '@jswork/path-dual-parser';
+ *
+ * params('/users/:id/posts/{postId}')  // ['id', 'postId']
+ * params('/users')                     // []
+ * ```
+ */
+export function params(template: string): string[] {
+  return normalize(template).paramNames;
+}
+
+/**
+ * Tests whether a path matches a template.
+ *
+ * Returns a boolean result without extracting parameters.
+ * Useful for quick route matching checks.
+ *
+ * @param template - The path template (e.g., `/users/:id` or `/users/{id}`)
+ * @param path - The actual path to test
+ * @returns `true` if the path matches the template, `false` otherwise
+ *
+ * @example
+ * ```ts
+ * import { test } from '@jswork/path-dual-parser';
+ *
+ * test('/users/:id', '/users/123')  // true
+ * test('/users/:id', '/posts/1')    // false
+ * ```
+ */
+export function test(template: string, path: string): boolean {
+  return match(template)(path) !== false;
+}

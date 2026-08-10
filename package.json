@@ -1,6 +1,6 @@
 {
   "name": "@jswork/path-dual-parser",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "Path matcher supporting both colon and brace URI template syntax.",
   "npmClient": "pnpm",
   "main": "dist/index.cjs.js",

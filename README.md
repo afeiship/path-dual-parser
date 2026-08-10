@@ -69,15 +69,15 @@ params('/users/:id/posts/{postId}')  // ['id', 'postId']
 params('/users')                     // []
 ```
 
-### test
+### isMatch
 
 Check whether a path matches a template (boolean result):
 
 ```ts
-import { test } from '@jswork/path-dual-parser';
+import { isMatch } from '@jswork/path-dual-parser';
 
-test('/users/:id', '/users/123')  // true
-test('/users/:id', '/posts/1')    // false
+isMatch('/users/:id', '/users/123')  // true
+isMatch('/users/:id', '/posts/1')    // false
 ```
 
 ## license

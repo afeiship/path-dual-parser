@@ -42,12 +42,12 @@ Extract parameter names from a template.
 - `params('/users/:id/posts/{postId}')` → `['id', 'postId']`
 - `params('/users')` → `[]`
 
-### test(template: string, path: string): boolean
+### isMatch(template: string, path: string): boolean
 
 Check whether a path matches a template (boolean result).
 
-- `test('/users/:id', '/users/123')` → `true`
-- `test('/users/:id', '/posts/1')` → `false`
+- `isMatch('/users/:id', '/users/123')` → `true`
+- `isMatch('/users/:id', '/posts/1')` → `false`
 
 ## Types
 
@@ -58,7 +58,7 @@ function match(template: string): (path: string) => MatchResult;
 function compile(template: string): (params: Record<string, string>) => string;
 function parse(template: string, data: Record<string, string>): string;
 function params(template: string): string[];
-function test(template: string, path: string): boolean;
+function isMatch(template: string, path: string): boolean;
 ```
 
 ## Notes
